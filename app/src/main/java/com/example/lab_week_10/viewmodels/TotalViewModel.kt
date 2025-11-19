@@ -6,10 +6,22 @@ import androidx.lifecycle.ViewModel
 
 class TotalViewModel : ViewModel() {
 
-    private val _total = MutableLiveData<Int>(0)
-    val total: LiveData<Int> get() = _total
+    // Backing property
+    private val _total = MutableLiveData<Int>()
+    val total: LiveData<Int> = _total
+
+    init {
+        // initialize to 0
+        _total.postValue(0)
+    }
 
     fun incrementTotal() {
-        _total.value = (_total.value ?: 0) + 1
+        // use postValue to be safe for background threads; setValue would also work on main thread
+        _total.postValue((_total.value ?: 0) + 1)
+    }
+
+    // optional setter (useful later for Room)
+    fun setTotal(newTotal: Int) {
+        _total.postValue(newTotal)
     }
 }
