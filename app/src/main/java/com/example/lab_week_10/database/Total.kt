@@ -11,5 +11,8 @@ data class Total(
     val id: Long = 1L,
 
     @ColumnInfo(name = "total")
-    val total: Int = 0
+    val total: Int = 0,
+
+    @ColumnInfo(name = "last_updated")
+    val lastUpdated: Long = 0L
 )
